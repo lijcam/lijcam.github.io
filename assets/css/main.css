@@ -3840,12 +3840,12 @@ a.navbar-item,
 .tags.are-medium.are-white .tag:not(body) {
   background: var(--color-bg-main); }
 
-.section.is-note .column.is-primary-content,
-.note-page-section {
+.section.is-lesson .column.is-primary-content,
+.lesson-page-section {
   position: relative;
 }
 
-.section.is-note .box {
+.section.is-lesson .box {
   background: var(--color-bg-main); }
 
 .content .image.is-fullwidth {
@@ -3853,10 +3853,10 @@ a.navbar-item,
   margin-right: 0; }
 
 @media screen and (min-width: 769px), print {
-  .section.is-note .column.is-primary-content,
-    .note-page-section {
+  .section.is-lesson .column.is-primary-content,
+    .lesson-page-section {
       padding: 0rem; } 
-  .note-cards .content {
+  .lesson-cards .content {
     width: 88%; }
     }
 

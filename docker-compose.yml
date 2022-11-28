@@ -15,7 +15,7 @@ services:
       - jekyll
     volumes:
       - ./_posts:/usr/src/app/_posts
-      - ./_notes:/usr/src/app/_notes
+      - ./_lessons:/usr/src/app/_lessons
       - ./assets:/usr/src/app/assets
       - ./pages:/usr/src/app/pages
     ports:

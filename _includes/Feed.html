@@ -29,14 +29,14 @@
 *
 {%- endcomment -%}
 
-<!--Notes Feed-->
-<!--Static Page : pages/notes.md-->
+<!--Lessons Feed-->
+<!--Static Page : pages/lessons.md-->
 
 {%- if page.feedformat == "card" -%}
     {%- if site.preferences.search.enabled -%}
         <!-- search bar -->
         <div class="block">
-            <input class="input is-medium" type="text" placeholder="Search notes.." id="search-input" autocomplete="off">
+            <input class="input is-medium" type="text" placeholder="Search lessons.." id="search-input" autocomplete="off">
             <div id="search-results" class="search-results"></div>
         </div>
         <script type="text/javascript" src="{{ site.baseurl }}/assets/js/vendor/lunr.min.js"></script>
@@ -44,14 +44,14 @@
     {%- endif -%}
     <!-- feed with filter-->
     <div class="related-wrapper">
-    {% assign note_items = site.notes | sort: "date" | reverse %}
-    {% for note_items in note_items %}
-        {%- if note_items.feed == "show" -%}
-                <div class="notelist-feed">
-                    <a href="{{ site.baseurl }}{{note_items.url}}">
-                        <h6>{{ note_items.title }}</h6>
+    {% assign lesson_items = site.lessons | sort: "date" | reverse %}
+    {% for lesson_items in lesson_items %}
+        {%- if lesson_items.feed == "show" -%}
+                <div class="lessonlist-feed">
+                    <a href="{{ site.baseurl }}{{lesson_items.url}}">
+                        <h6>{{ lesson_items.title }}</h6>
                         <p class="excerpt">
-                            {{ note_items.content | strip_html | strip | remove: "[[" | remove: "]]" | remove: "-" | escape | truncate: 200 }}
+                            {{ lesson_items.content | strip_html | strip | remove: "[[" | remove: "]]" | remove: "-" | escape | truncate: 200 }}
                         </p>
                     </a>
                 </div>
@@ -65,13 +65,13 @@
 
 {%- if page.feedformat == "row" -%}
 <div class="block">
-    {% assign note_items = site.notes | sort: "date" | reverse %}
-    {% for note_items in note_items %}
-        {%- if note_items.format == "list" -%}
+    {% assign lesson_items = site.lessons | sort: "date" | reverse %}
+    {% for lesson_items in lesson_items %}
+        {%- if lesson_items.format == "list" -%}
             <div class="list-feed">
-                    <a href="{{ site.baseurl }}{{note_items.url}}" style="text-decoration: none;display: flex;justify-content: space-between;flex-direction: row;width: 100%;">
+                    <a href="{{ site.baseurl }}{{lesson_items.url}}" style="text-decoration: none;display: flex;justify-content: space-between;flex-direction: row;width: 100%;">
                         <div class="writinglist-title">
-                            {{note_items.title }}
+                            {{lesson_items.title }}
                         </div>
                     </a>
             </div>

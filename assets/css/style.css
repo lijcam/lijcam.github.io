@@ -177,7 +177,7 @@ html {
 }
 
 body {
-    counter-reset: sidenote-counter;
+    counter-reset: sidelesson-counter;
 }
 
 .section {
@@ -239,7 +239,7 @@ main {
     font-size: var(--text-s) !important;
 }
 
-/* 06. Related Notes */
+/* 06. Related Lessons */
 
 .related {
     width: 100%;
@@ -293,22 +293,22 @@ ul ul {
 }
 
 /* 07. Feeds */
-/* Notes Feed */
-.notelist-wrapper {
+/* Lessons Feed */
+.lessonlist-wrapper {
     column-count: 2 !important;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 10px;
 }
 
-.notelist-feed {
+.lessonlist-feed {
     color: var(--color-text-main);
     display: block;
     padding: 1rem;
     border-bottom: 1px solid var(--color-border-light);
 }
 
-.notelist-feed:hover {
+.lessonlist-feed:hover {
     color: var(--color-text-main);
     display: block;
     padding: 1rem;
@@ -316,15 +316,15 @@ ul ul {
     background-color: var(--color-bg-sub);
 }
 
-.notelist-feed a {
+.lessonlist-feed a {
     color: var(--color-text-main);
 }
 
-.notelist-feed a:hover {
+.lessonlist-feed a:hover {
     color: var(--color-text-link);
 }
 
-.related-group h6, .notelist-feed h6 {
+.related-group h6, .lessonlist-feed h6 {
     padding: 0.4rem 0 !important;
 }
 
@@ -543,13 +543,13 @@ hr {
     text-decoration: none;
 }
 
-.link-to-notes {
+.link-to-lessons {
     padding-left: 20px;
     margin-top: -12px;
     padding-bottom: 8px;
 }
 
-.link-to-notes a {
+.link-to-lessons a {
     color: var(--color-text-link);
     text-decoration: none;
     font-family: var(--primary-font-family);
@@ -557,12 +557,12 @@ hr {
     margin-left: -3px;
 }
 
-.link-to-notes a:hover {
+.link-to-lessons a:hover {
     text-decoration: underline;
 }
 
-.link-to-notes a,
-.link-to-notes svg {
+.link-to-lessons a,
+.link-to-lessons svg {
     vertical-align: middle;
     display: inline-block;
 }
@@ -649,7 +649,7 @@ hr {
 }
 
 
-/* Common custom components between Main Site and Notes: Searchbar, Backbutton, ContentBox, Related Posts/Notes, Copyright,  */
+/* Common custom components between Main Site and Lessons: Searchbar, Backbutton, ContentBox, Related Posts/Lessons, Copyright,  */
 
 .searchbar input[type="text"] {
     position: relative;
@@ -1013,11 +1013,11 @@ hr {
     padding-bottom: 5px;
 }
 
-.sidenote-number {
-    counter-increment: sidenote-counter;
+.sidelesson-number {
+    counter-increment: sidelesson-counter;
 }
 
-.sidenote-number:after,
+.sidelesson-number:after,
 .sn-left:before,
 .sn-right:before {
     font-family: var(--secondary-font-family) !important;
@@ -1025,8 +1025,8 @@ hr {
     vertical-align: baseline;
 }
 
-.sidenote-number:after {
-    content: counter(sidenote-counter);
+.sidelesson-number:after {
+    content: counter(sidelesson-counter);
     font-size: 12px;
     top: -0.5rem;
     left: 0.1rem;
@@ -1034,7 +1034,7 @@ hr {
 
 .sn-right:before,
 .sn-left:before {
-    content: counter(sidenote-counter) " ";
+    content: counter(sidelesson-counter) " ";
     font-size: 14px;
     top: -0.5rem;
 }
@@ -1152,11 +1152,11 @@ input.margin-toggle {
     stroke: var(--color-text-main);
 }
 
-label.sidenote-number {
+label.sidelesson-number {
     display: inline;
 }
 
-label.margin-toggle:not(.sidenote-number) {
+label.margin-toggle:not(.sidelesson-number) {
     display: none;
 }
 
@@ -1455,7 +1455,7 @@ label.srs-toggle {
         cursor: pointer;
     }
 
-    label.margin-toggle:not(.sidenote-number) {
+    label.margin-toggle:not(.sidelesson-number) {
         display: inline;
     }
 
