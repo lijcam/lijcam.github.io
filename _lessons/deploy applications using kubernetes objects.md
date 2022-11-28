@@ -1,7 +1,7 @@
 ---
 title: Deploy applications using Kubernetes objects
 feed: show
-date : 15-04-2021
+track : 2
 ---
 
 Following on from the previous exercise, we will redeploy the Pacman application using Kubernetes objects.

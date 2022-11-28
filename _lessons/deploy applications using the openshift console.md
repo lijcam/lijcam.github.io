@@ -1,7 +1,7 @@
 ---
 title : Deploy applications using the OpenShift console
 feed: show
-date : 21-03-2022
+track : 1
 ---
 
 Another email comes through with details of the OpenShift cluster, and location of the container images.

@@ -44,12 +44,12 @@
     {%- endif -%}
     <!-- feed with filter-->
     <div class="related-wrapper">
-    {% assign lesson_items = site.lessons | sort: "date" | reverse %}
+    {% assign lesson_items = site.lessons | sort: "track" %}
     {% for lesson_items in lesson_items %}
         {%- if lesson_items.feed == "show" -%}
                 <div class="lessonlist-feed">
                     <a href="{{ site.baseurl }}{{lesson_items.url}}">
-                        <h6>{{ lesson_items.title }}</h6>
+                        <h6>{{lesson_items.track}}. {{ lesson_items.title }}</h6>
                         <p class="excerpt">
                             {{ lesson_items.content | strip_html | strip | remove: "[[" | remove: "]]" | remove: "-" | escape | truncate: 200 }}
                         </p>
@@ -65,7 +65,7 @@
 
 {%- if page.feedformat == "row" -%}
 <div class="block">
-    {% assign lesson_items = site.lessons | sort: "date" | reverse %}
+    {% assign lesson_items = site.lessons | sort: "track" %}
     {% for lesson_items in lesson_items %}
         {%- if lesson_items.format == "list" -%}
             <div class="list-feed">
