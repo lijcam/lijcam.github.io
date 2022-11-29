@@ -1,4 +1,3 @@
 _site
 .jekyll-cache
-pages/.DS_Store
-pages/tags.md
+**/.DS_Store
