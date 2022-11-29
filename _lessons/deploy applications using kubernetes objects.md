@@ -4,28 +4,44 @@ feed: show
 track : 2
 ---
 
-Following on from the previous exercise, we will redeploy the Pacman application using Kubernetes objects.
+The container-based deployment of the Pacman application worked better than expected, and performance testing completed without any issues.
 
-Kubernetes Objects are persistent entities in the Kubernetes system. Kubernetes uses these entities to represent the state of a cluster. A Kubernetes object is a "record of intent"—once you create the object, Kubernetes will constantly work to ensure that object exists. We use YAML notation to describe Kubernetes Objects, and are the foundation of Infrastructure as Code practices in Kubernetes.
+Another test is happening this weekend, and the delivery team has taken your learnings from the last exercise, and distilled them as [Kubernetes API objects](https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects)
 
-In the previous exercise, OpenShift created our Kubernetes Objects for us, in this exercise will use the Kubernetes Objects created by the team since the last test.
-Look in the Editor Tab, we can see objects we will apply.
-Click on each of the items and study their composition.
+Kubernetes objects are persistent entities in the Kubernetes system. Kubernetes uses these entities to represent the state of a cluster. A Kubernetes object is a "record of intent", once you create the object, Kubernetes will constantly work to ensure that object exists. We use YAML notation to describe Kubernetes objects, and are the foundation of infrastructure-as-code practices in Kubernetes.
 
-As you can see, there are numerous matching labels across all the objects.
-A label is a key-pair value tag that can be applied to most resources in Kubernetes to give extra meaning or context to that resource for later filtering for selecting.
-There are several [recommended labels](https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/ "Kubernetes.io Recommended Labels") that are used by Kubernetes including Openshift to link objects, and visual the project in the Topology view.
+In the previous exercise, OpenShift created our Kubernetes objects for us, in this exercise will use the Kubernetes objects created by the team since the last test.
 
-## Deploy the database
+## 1. Setup
 
-Return to the Terminal Tab and Create the Project, Mongo Deployment and Service.
+The delivery team has created a GitHub Gist to download the Kubernetes objects. We'll use a web terminal to retrieve them.
+
+![create-web-terminal](../assets/img/create-web-terminal.png)
 
 ```
-oc new-project team-pacman
+curl -sS https://gist.githubusercontent.com/joelapatatechaude/348e52790d9307c11410d5236f9555c0/raw/063749cdd18344adbb41f28aa9faecb04da425f8/setup.sh | bash
 ```
 
+We can navigate the web terminal like any standard Linux terminal. 
+The Kubernetes objects have been downloaded into the team-pacman directory. Enter the directory and review each of the objects and study their composition using your viewer of choice — `cat`, `vi`, `vim` or `nano`.
+
 ```
-cd /root/team-pacman
+cd team-pacman
+ls
+```
+
+What do you find common across the objects? 
+
+There are numerous matching labels across all the objects.
+A label is a key-pair value tag that can be applied to resources in Kubernetes to give extra meaning or context to that resource for later filtering or selecting.
+There are several [recommended labels](https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/ "Kubernetes.io Recommended Labels") that are used by Kubernetes including OpenShift to link objects, and visualise the project in the Topology view.
+
+## 1. Deploy the database
+
+Use the terminal to apply the Mongo Deployment and Service.
+
+```
+oc project userXX-team-pacman
 ```
 
 ```
@@ -36,21 +52,10 @@ oc apply -f mongo-deployment.yml
 oc apply -f mongo-service.yml
 ```
 
-<details><summary>Review the deployment from the OpenShift Console. Use these credentials.</summary>
-<pre>
-  username: admin
-  password: admin
-</pre>
-You may need to log out from the OpenShift console from the previous exercise.
-</details>
+## 2. Deploy the Pacman application
 
-Enter the Developer perspective, and enter the Topology view. Switch to Project `team-pacman`.
 
-![perspective-toggle](../assets/img/perspective-toggle.png)
-
-## Deploy the Pacman application
-
-Use the existing Pacman Kubernetes Objects to deploy the Pacman app.
+Use the terminal to apply the Pacman Deployment, Service, and Route.
 
 ```
 oc apply -f pacman-deployment.yml
@@ -64,31 +69,35 @@ oc apply -f pacman-service.yml
 oc apply -f pacman-route.yml
 ```
 
-Return to the OpenShift console to review the Topology.
+Review to the OpenShift console to review the Topology.
 
 Once the Pacman application is up and running, we can find its route by running:
 
 ```
 oc get routes
 ```
-## Using a label selector
+## 3. Using a label selector
 
-When we ran `oc get routes` Kubernetes returns results in the context of the project we are in. We can determine which project context we are in by running.
+When we ran `oc get pods` Kubernetes returns all results in the context of the project we are in.
 
-```
-oc project
-```
-
-What if we want to see all the routes out of our Kubernetes Cluster? We can include the `-A` flag, this tells Kubernetes to return all results from all projects.
+For example, you should see results similar to this:
 
 ```
-oc get -A routes
+oc get pods
+NAME                      READY   STATUS    RESTARTS   AGE
+mongo-6f6cbb85f5-g9vt6    1/1     Running   0          12m
+pacman-558945b7d8-9kxdx   1/1     Running   0          5m25s
 ```
 
-We only have a small cluster with a handful of routes. What if we had a larger cluster, with countless applications? What if we don't know what project something is in? We can use a label selector to find it.
-
-If we look at the `pacman-route.yaml` Kubernetes Object in the Editor Tab, we can pick one of the labels and ask Kubernetes which route has the corresponding label.
+What if we are only wanted to return a list of the Mongo pods? Let’s filter using our labels.
 
 ```
-oc get -A routes -l app=pacman
+oc get pods -l app=mongo
+```
+On a large cluster, it is commonplace for there to have thousands of pods running. Labels provide us a quick and efficient way to find our related resources quickly. We can also group multiple resources together using the label selector.
+
+For example to find all the Replica sets, Pods, and Deployments for Mongo. 
+
+```
+oc get replicasets,pods,deployments -l app=mongo
 ```

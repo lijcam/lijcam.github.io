@@ -99,4 +99,4 @@ After completing our deployments, we can return to the topology screen. You will
 
 ![Pacman route](../assets/img/launch-route.png)
 
-What OpenShift has done behind the scenes is taken care of all the plumbing — the networking, services, routes, and deployments. We can export those objects from OpenShift and use them to form the basis of a infrastructure-as-code practice around our application.
+What OpenShift has done behind the scenes is taken care of all the plumbing — the networking, services, routes, and deployments. We can export those objects from OpenShift and use them to form the basis of an infrastructure-as-code practice around our application.
