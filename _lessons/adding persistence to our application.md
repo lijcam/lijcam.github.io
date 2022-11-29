@@ -30,29 +30,13 @@ Pick your challange, using the [OpenShift console](#openshift-console-instructio
 # OpenShift Console Instructions
 [Looking for the command line instructions?](#openshift-command-line-instructions)
 
-## 1. Create a Persistent Volume Claim
+## 1. Review the Persistent Volume Claim
 
-Switch to the Administrator perspective, and navigate to `Storage` > `PersistentVolumeClaims` and click on `Create PersistentVolumeClaim`.
+Switch to the Administrator perspective, and navigate to `Storage` > `PersistentVolumeClaims`. Reivew the mongo-storage Persistent Volume Claim.
 
-| Configuration              | Parameter           |
-|----------------------------|---------------------|
-| StorageClass               | `gp3`               |
-| PersistentVolumeClaim name | `mongo-storage`     |
-| Access mode<sup>(1)</sup>  | `Single User (RWO)` |
-| Size                       | `8 GiB`             |
-| Use label selectors...     | `untick`            |
-| Volume mode                | `Filesystem`        |
+Notice that the Persistent Volume Claim is in a pending state. We are using dynamic provisioning so, the Persistent Volume Claim will be created when a Pod attempts to mount it.
 
-Learn more about [access modes (RWO, RWX, ROX)](https://docs.openshift.com/container-platform/4.11/storage/understanding-persistent-storage.html#pv-access-modes_understanding-persistent-storage) in the OpenShift documentation.
-
-![Create PVC](../assets/img/create-pvc.png)
-
-## 2. Review the Persistent Volume Claim
-
-After creating the Persistent Volume Claim, you can review it from the Administrator perspective: `Storage` > `PersistentVolumeClaims`.
-Notice that the claim is in a pending state. We are using dynamic provisioning so, the claim will be created when a Pod attempts to mount it.
-
-## 3. Mount the Persistent Volume Claim
+## 2. Mount the Persistent Volume Claim
 
 Switch to the Developer perspective, make sure the current project is `userXX-team-pacman`, navigate to Topology, and bring up the details of the mongo deployment.
 Select `Actions` then `Add storage`.
@@ -82,10 +66,11 @@ Your deployment will automatically redeploy a new mongo pod with the volume atta
 The Persistent Volume Claim object definition already available and ready for you to apply.
 
 ```
-oc apply -f team-pacman/mongo-pvc.yml
+oc describe pvc mongo-storage
 ```
+Notice that the Persistent Volume Claim is in a pending state. We are using dynamic provisioning so, the Persistent Volume Claim will be created when a Pod attempts to mount it.
 
-Edit the `mongo-deployment.yaml` file in the Editor Tab.
+Edit the `mongo-deployment.yml` object.
 
 Modify our pod template for mongo to include the `volume`, and a `volumeMount` for the container. [An example can be found in offical documentation](https://docs.openshift.com/container-platform/4.10/storage/understanding-persistent-storage.html#pvc-claims-as-volumes_understanding-persistent-storage) but make sure you set the following parameters correctly.
 
@@ -95,7 +80,7 @@ Modify our pod template for mongo to include the `volume`, and a `volumeMount` f
 Once you have done the required modifications, you can re-apply the mongo Deployment with:
 
 ```
-oc apply -f /root/team-pacman/mongo-deployment.yaml
+oc apply -f team-pacman/mongo-deployment.yaml
 ```
 
 # Test your changes
