@@ -6,11 +6,9 @@ track : 3
 
 This exercise builds on what we learned from the previous exercise. The goal, to attach storage into our mongo pod to keep our high scores!
 
-If you are looking for more of a challenge, this section has the option to complete using the command line, but does require familiarity with editing [YAML notation](https://en.wikipedia.org/wiki/YAML).
+Containers are stateless in nature. If our container fails, is redeployed, or rescheduled to another node, any data it was holding is lost. In Kubernetes, we use Persistent Volumes to overcome this, by attaching a [Persistent Volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes "Kubernetes documentation") to our containers.
 
-Containers are stateless in nature. If our container fails, is redeployed, or rescheduled to another node, any data it was holding is lost. In Kubernetes, we use Persistent Volumes to overcome this, by attaching a Persistent Volume Claim to our containers.
-
-Enter the Developer perspective, and enter the Topology view. Switch to Project `userXX-team-pacman`.
+Enter the Developer perspective, and enter the Topology view. Switch to project **_username_-team-pacman**.
 
 ![deploy-mongo-pacman](../assets/img/deploy-mongo-pacman.png)
 
@@ -26,7 +24,9 @@ Go ahead and try.
 
 Let's add some persistence!
 
-Pick your challange, using the [OpenShift console](#openshift-console-instructions), or [Openshift command line](#openshift-command-line-instructions).
+If you are looking for more of a challenge, this exercise has the option to complete using the command line, but does require familiarity with editing [YAML](https://en.wikipedia.org/wiki/YAML).  
+
+The recommended approach is to use the [OpenShift console](#openshift-console-instructions), but those comfortable in a Linux command line feel free to challenge yourself using the [OpenShift command line](#openshift-command-line-instructions).
 # OpenShift Console Instructions
 [Looking for the command line instructions?](#openshift-command-line-instructions)
 

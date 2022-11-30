@@ -44,7 +44,7 @@ The Developer perspective draws a focus around the application and microservices
 Projects are a way for teams to organise their applications and content in isolation from other teams.
 
 From the Developer perspective create a new project by clicking on `Create a new project`.
-Name the project `userxx-team-pacman`.
+Name the project **_username_-team-pacman**.
 
 ![New Project](../assets/img/create-new-project.png)
 
@@ -58,7 +58,7 @@ Click the `+Add` menu item, followed by `Container images`.
 
 ![Container image](../assets/img/container-images.png)
 
-Firstly deploy the Mongo container using the following specification.
+Firstly deploy the Mongo container using the following specification and press submit.
 
 
 
@@ -78,7 +78,7 @@ Firstly deploy the Mongo container using the following specification.
 
 Click the `+Add` menu item, followed by `Container images`.
 
-Deploy the Pacman container using these parameters.
+Deploy the Pacman container using these parameters and press submit.
 
 | Configuration                        | Parameter                  |
 |--------------------------------------|----------------------------|
